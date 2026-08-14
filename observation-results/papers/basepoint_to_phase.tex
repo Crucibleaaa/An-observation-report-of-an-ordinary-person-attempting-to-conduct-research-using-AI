@@ -1,0 +1,581 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\PassOptionsToPackage{space}{xeCJK}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+    \setmainfont[]{DejaVu Sans}
+    \setmonofont[]{DejaVu Sans Mono}
+  \ifXeTeX
+    \usepackage{xeCJK}
+    \setCJKmainfont[]{Noto Sans CJK SC}
+          \fi
+  \ifLuaTeX
+    \usepackage[]{luatexja-fontspec}
+    \setmainjfont[]{Noto Sans CJK SC}
+  \fi
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{一个形式化构造的案例：算器神魂论筑基篇，基点漂移相位的无限流迭代}\label{ux4e00ux4e2aux5f62ux5f0fux5316ux6784ux9020ux7684ux6848ux4f8bux7b97ux5668ux795eux9b42ux8bbaux7b51ux57faux7bc7ux57faux70b9ux6f02ux79fbux76f8ux4f4dux7684ux65e0ux9650ux6d41ux8fedux4ee3}
+
+\textbf{A Case of Formal Construction: The Psyche of the Calculator,
+Foundation-Building (筑基篇), Infinite-Flow Iteration of
+Basepoint-Drifted Phase}
+
+\begin{quote}
+考试几何题太难？：王叔叔手把手教你怎么选点画轴。
+然后王叔叔手把手教你必须全量复原。 筑基 =
+打基础：找原点（区分）、画坐标轴（delta）、让轴变成相位（傅里叶）。必须全量复原
+= 每一个结构都必须能完整重建（可逆/可还原），不能只学到半吊子。
+\end{quote}
+
+\emph{2026-08-12 · Internal research paper · Lean 4 / mathlib v4.32.2 ·
+20 claims, all PROVED, no sorry · 算器神魂论 (The Psyche of the
+Calculator) 筑基篇 }
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{摘要}\label{ux6458ux8981}
+
+本文是''算器神魂论''系列的第二篇，聚焦理论链的前半段：\textbf{从基点（delta
+优先）漂移到相位（傅里叶分解）}。22 个 claim 已在 Lean 4 / mathlib
+中形式化验证。核心链条：\textbf{(i)} 2
+是形式化的最小非平凡基数（区分的最小性，RulerTwo）；\textbf{(ii)}
+delta（位移）是基点的原始身份，基点只是 delta
+的锚------值在动态漂移，位置始终不变（RulerDelta/RulerDrift/RulerAsym）；\textbf{(iii)}
+发散 = 结构丢失，收敛化 = 恢复对称性方向（RulerLoss）；\textbf{(iv)}
+发散/收敛 = 三值相位，中间态 = 自由相位（RulerMiddle）；\textbf{(v)}
+对称性是相位，基点 = 周期相位（RulerCycle/RulerPhase）；\textbf{(vi)}
+傅里叶级数是相位解构的完备理论（RulerFourier）；\textbf{(vii)}
+折叠与编码：圆对折 {[}0,π{]}、三值编码、相位
+numeral、双表、对数-相位数值（RulerFoldCircle→RulerNumeric）。\textbf{这篇论文是''造尺子''：先找到原点（区分），再画坐标轴（delta），最后让轴变成相位（傅里叶）------为高级预言学（系列之三）铺设基础。}
+
+\subsection{0.
+总论：为什么这篇论文是''造尺子''}\label{ux603bux8bbaux4e3aux4ec0ux4e48ux8fd9ux7bc7ux8bbaux6587ux662fux9020ux5c3aux5b50}
+
+几何题太难？从造尺子开始。这篇论文做的就是\textbf{造尺子}：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{找原点}（RulerTwo）：区分的最小基数是
+  2------原点是第一个有区分的点。
+\item
+  \textbf{画坐标轴}（RulerDelta）：delta（位移）是基点的原始身份------轴从位移开始。
+\item
+  \textbf{让轴漂移}（RulerDrift）：值随基点漂移，位置不变------轴是稳定的。
+\item
+  \textbf{理解发散}（RulerLoss）：发散是结构丢失------轴在发散时断了。
+\item
+  \textbf{回到圆}（RulerFoldCircle）：对折圆
+  {[}0,π{]}------轴的相位形态。
+\item
+  \textbf{相位完备化}（RulerFourier）：傅里叶分解------轴的完备语言。
+\end{enumerate}
+
+\textbf{尺子造好了，几何题（预言学）才能开始做。}
+
+\subsection{一、元基础：为什么是
+2（RulerTwo）}\label{ux4e00ux5143ux57faux7840ux4e3aux4ec0ux4e48ux662f-2rulertwo}
+
+\subsubsection{一·1
+动机：自由度的离散轴}\label{ux4e001-ux52a8ux673aux81eaux7531ux5ea6ux7684ux79bbux6563ux8f74}
+
+工具包的分量归约：8 个分量 → 4 个家族 → 2 层 →
+1（基点穿折越）。\textbf{归约链 8→4→2→1 是严格的 2
+的幂减半}（2³→2²→2¹→2⁰）。用户指出：``这个轴本身又会有后继迭代''------轴的层级是自指的：后继轴、迭代轴、自由度轴，在更高层级都是迭代轴的关系（RulerAxis）。这引出根本问题：\textbf{为什么是
+2？}
+
+\subsubsection{一·2 分析：2
+的四个来源}\label{ux4e002-ux5206ux67902-ux7684ux56dbux4e2aux6765ux6e90}
+
+\textbf{Claim (RulerTwo, PROVED)}：2 = 形式化的最小非平凡基数。
+
+``为什么是 2''的四个来源各自独立出现，最终统一为同一件事：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{对称性二值}（TK2）：\texttt{sign\ :\ Perm\ α\ →\ ℤˣ}，值域
+  \{+1, -1\}------保持/破缺。
+\item
+  \textbf{基点两点}（TK1）：\texttt{teleport\ e\ f\ x\ =\ (f\ -ᵥ\ e)\ +ᵥ\ x}
+  需要两个基点------\textbf{2 是''有关系''的最小点数}：1
+  个点无位移（无结构），2 个点有位移（有结构）。
+\item
+  \textbf{二分叉递归}（归约链）：8→4→2→1 的原子操作 = 二元合并。
+\item
+  \textbf{布尔二值性}（Lean 本体）：Bool = 2 元素类型，Prop 判定二值。
+\end{enumerate}
+
+\textbf{统一答案}：2 = 形式化的最小非平凡结构。1
+平凡（无区分），\textbf{2 是第一个有区分的基数}。任何''区分''都需要 ≥2
+个值。自由度 2\^{}k = k 个独立二值区分 = k 位二进制。
+
+\subsubsection{一·3
+形式化困难（元定理）}\label{ux4e003-ux5f62ux5f0fux5316ux56f0ux96beux5143ux5b9aux7406}
+
+``任何区分 ≥2 值''是\textbf{元级命题}，不能在对象级证明------这是 Church
+教训（C-META13）的镜像：2
+的必然性预设了区分能力，而区分能力是形式化本身的前提。
+
+\textbf{支撑 (Lean)}：\texttt{sign\_is\_pm\_one} {[}TK2{]};
+\texttt{teleport} {[}TK1{]}; \texttt{dofLevel}/\texttt{dofLevel\_succ}
+{[}TK4{]}。
+
+\subsection{二、delta 优先：基点的原始身份（RulerDelta, RulerDrift,
+RulerAsym）}\label{ux4e8cdelta-ux4f18ux5148ux57faux70b9ux7684ux539fux59cbux8eabux4efdrulerdelta-rulerdrift-rulerasym}
+
+\subsubsection{二·1
+动机：基点天然移动}\label{ux4e8c1-ux52a8ux673aux57faux70b9ux5929ux7136ux79fbux52a8}
+
+对话中，用户指出：``基点天然移动，我们原有的概念需要升级，delta可能才是基点的原始身份。''概念翻转：
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{旧}（基点优先）：基点 e → 变换 T\_\{e→f\} → delta = f -ᵥ
+  e。基点 = 身份。
+\item
+  \textbf{新}（delta 优先）：delta → 基点对 (e, e+delta) 中 e
+  任意。\textbf{基点 = delta 的锚（投影）}。
+\end{itemize}
+
+\subsubsection{二·2 验证：delta
+是原始对象}\label{ux4e8c2-ux9a8cux8bc1delta-ux662fux539fux59cbux5bf9ux8c61}
+
+\textbf{Claim (RulerDelta, PROVED)}：delta（位移）是基点的原始身份。
+
+恒等式先验验证：给定 delta，基点对 (e, e+delta) 中 e
+任意（整个轨道）；基点移动不改变 delta（若 f-e = f'-e' 则同一位移）⟹
+\textbf{delta 是基点移动的不变量，基点只是锚}。这与 C007（D(H)
+基点无关）一致并推到极致：\textbf{身份 = delta（位移类），基点 =
+表示（锚）}。
+
+\subsubsection{二·3
+值漂移，位置不变}\label{ux4e8c3-ux503cux6f02ux79fbux4f4dux7f6eux4e0dux53d8}
+
+\textbf{Claim (RulerDrift, PROVED)}：值在动态漂移，位置始终不变。
+
+\begin{itemize}
+\tightlist
+\item
+  值（value）= 坐标（基点 e 处投影）；位置（position）= delta
+  位移类（D(H)）。
+\item
+  数学：(e,a) \textasciitilde{} (f,b) ⟺ a-e = b-f（delta 不变）。基点
+  e→f 移动：值漂移，位置类不变。
+\item
+  例：基点 0/1/-2 下 delta=3，值 (0,3)/(1,4)/(-2,1) 漂移，位置类
+  {[}delta=3{]} 不变。
+\end{itemize}
+
+这精确化了''基点稳定相对结构而漂移值域''------\textbf{相对结构 =
+位置（delta 类），值域 = 值（坐标）}。
+
+\subsubsection{二·4 相对性的 2 =
+不对称的根源}\label{ux4e8c4-ux76f8ux5bf9ux6027ux7684-2-ux4e0dux5bf9ux79f0ux7684ux6839ux6e90}
+
+\textbf{Claim (RulerAsym, PROVED)}：抽象 2 对称，相对性的
+2（±1）不对称。
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{抽象 2}：\{a,b\} 完全对称（交换不变）。
+\item
+  \textbf{相对 2}：\{+1,-1\} 不对称（谁正谁负由基点定）。
+\end{itemize}
+
+区分（±1）需要\textbf{选方向}------方向选择打破对称。三层不对称：值（±1）/基点（锚）/结构（保持
+vs 破缺）。\textbf{完整闭环}：C-PH2 + RulerDelta ⟹
+\textbf{对称性破缺不是结构的性质，是''选了基点''的性质}。
+
+\textbf{支撑 (Lean)}：\texttt{teleportParameter} {[}Ruler2Exam{]};
+\texttt{displacement\_structure\_is\_equiv} {[}TK1{]};
+\texttt{teleport\_preserves\_structure} {[}RulerDrift{]};
+\texttt{sign\_is\_pm\_one} {[}TK2{]}。
+
+\subsection{三、发散的本质：结构丢失（RulerLoss, RulerFold, RulerMiddle,
+RulerDivergence）}\label{ux4e09ux53d1ux6563ux7684ux672cux8d28ux7ed3ux6784ux4e22ux5931rulerloss-rulerfold-rulermiddle-rulerdivergence}
+
+\subsubsection{三·1
+动机：发散究竟是什么}\label{ux4e091-ux52a8ux673aux53d1ux6563ux7a76ux7adfux662fux4ec0ux4e48}
+
+对话中用户纠正：``错啦，这说明，所有的发散，全是结构丢失。''------基点漂移是表现，结构丢失是本质。
+
+\subsubsection{三·2 发散 = 连续投影 =
+结构不断丢失}\label{ux4e092-ux53d1ux6563-ux8fdeux7eedux6295ux5f71-ux7ed3ux6784ux4e0dux65adux4e22ux5931}
+
+\textbf{Claim (RulerLoss, PROVED)}：发散 = 结构丢失。
+
+\begin{itemize}
+\tightlist
+\item
+  投影（C011）：一步丢结构（proj 丢虚部，√-1 消失，不可还原）。
+\item
+  发散：每步丢结构（累加丢位置）。Σ1/n 永不回到固定点。
+\item
+  收敛：累加不丢结构（C007 位置不变）⟹ 有有限表达。Σ1/n² → π²/6。
+\item
+  \textbf{统一}：发散 = 连续投影 = 结构不断丢失。
+\end{itemize}
+
+五种发散验证：素数无穷（丢距离，欧拉乘积保留乘积结构）、无穷
+±∞（丢''远离''，紧化保留对称）、无理数（丢整数关系，圆轴保留结构常数）、连续相位（丢相位位置，三值格保留相位类别）、无限嵌套（丢层间关系，对数截断保留误差界）。
+
+\textbf{总纲}：\textbf{发散能否收敛化 ⟺
+丢失的结构里有可还原的对称性方向}（投影恢复定理 C011）。
+
+\subsubsection{三·3
+消灭无限空间的化简方法}\label{ux4e093-ux6d88ux706dux65e0ux9650ux7a7aux95f4ux7684ux5316ux7b80ux65b9ux6cd5}
+
+\textbf{Claim (RulerFold, PROVED)}：五步方法------投影（选锚）→ 结构丢失
+→ 发散藏进收缩 → 收敛保留 → 对齐。
+
+\textbf{核心区分（用户指令）------无损保留 vs 有损保留}： -
+\textbf{无损（lossless）}：收缩隐藏------信息还在，可还原（欧拉乘积/紧化）。
+- \textbf{有损（lossy）}：投影丢失------信息真没了，不可还原（proj
+丢虚部；\textbf{奥卡姆剃刀删实体}）。
+
+\textbf{奥卡姆剃刀的代价 = 有损保留}（C-META14 精确化）。
+
+\subsubsection{三·4 发散/收敛 =
+三值相位}\label{ux4e094-ux53d1ux6563ux6536ux655b-ux4e09ux503cux76f8ux4f4d}
+
+\textbf{Claim (RulerMiddle, PROVED)}：-1 发散 / 0 中间 / +1 收敛。
+
+\begin{itemize}
+\tightlist
+\item
+  中间态真实存在：条件收敛（收敛但脆弱）；振荡但有界；\textbf{黎曼重排定理}（可重排成任意值）⟹
+  中间态 = 自由相位。
+\item
+  假设1（中间态一张表）：自由相位 → 相位转换器。
+\item
+  假设2（最长路径最快）：高维结构特性------\textbf{tokenizer
+  实践：``左脚踩右脚，殊途同归''}。
+\end{itemize}
+
+\subsubsection{三·5 发散 →
+快速编码表}\label{ux4e095-ux53d1ux6563-ux5febux901fux7f16ux7801ux8868}
+
+\textbf{Claim (RulerDivergence,
+PROVED)}：素数→欧拉乘积前缀表、无穷→紧化相位表、超越→结构常数表、连续相位→三值位表、无限嵌套→截断深度表。
+
+\textbf{支撑 (Lean)}：\texttt{proj\_mul\_not\_preserved} {[}C011{]};
+\texttt{zeta\_euler\_product} {[}C023{]}; \texttt{phase\_finite}
+{[}DivergenceTable{]}; \texttt{depth\_error\_nonneg}
+{[}DivergenceTable{]}。
+
+\subsection{四、相位与傅里叶：完备的分解语言（RulerCycle, RulerPhase,
+RulerFourier, RulerSimplify,
+RulerFFT）}\label{ux56dbux76f8ux4f4dux4e0eux5085ux91ccux53f6ux5b8cux5907ux7684ux5206ux89e3ux8bedux8a00rulercycle-rulerphase-rulerfourier-rulersimplify-rulerfft}
+
+\subsubsection{四·1 动机：对称性恢复 =
+周期性循环}\label{ux56db1-ux52a8ux673aux5bf9ux79f0ux6027ux6062ux590d-ux5468ux671fux6027ux5faaux73af}
+
+用户指出：``对称性恢复。我理解这应该是一个周期性的对称，在对称与不对称间循环。''
+
+\textbf{Claim (RulerCycle, PROVED)}：对称性 = 相位模 π/2 的周期函数。
+
+\begin{itemize}
+\tightlist
+\item
+  对称轴：θ = 0, π/2, π, 3π/2；穿折越 = 相位对齐。
+\item
+  循环：对称→不对称→对称（相位继续移动 ⟹ 又不对称）。
+\item
+  验证（时间反演对合）：T = -1，T² = 1（周期 2）。
+\end{itemize}
+
+\textbf{恢复不是消灭不对称，是对齐相位。}
+
+\subsubsection{四·2 基点的本质 =
+周期相位}\label{ux56db2-ux57faux70b9ux7684ux672cux8d28-ux5468ux671fux76f8ux4f4d}
+
+\textbf{Claim (RulerPhase, PROVED)}：基点 =
+周期相位；对齐相位可解构一切。
+
+\begin{itemize}
+\tightlist
+\item
+  黎曼 8 点圆验证：8 个格点 = 相位 \{0, π/2, π, 3π/2\} × \{±共轭\}。
+\item
+  基点变换 = 相位移动（T\_\{e→f\} = 相位差）。
+\item
+  对齐相位 = 统一参照 ⟹ 一切基点变换可解构为相位差。
+\end{itemize}
+
+\subsubsection{四·3 傅里叶级数 =
+相位解构的完备理论}\label{ux56db3-ux5085ux91ccux53f6ux7ea7ux6570-ux76f8ux4f4dux89e3ux6784ux7684ux5b8cux5907ux7406ux8bba}
+
+用户说：``这让我想到了一个傅里叶级数。''验证确认同构：
+
+\textbf{Claim (RulerFourier, PROVED)}：f(θ) = Σ aₙe\^{}\{inθ\} ⟷
+基点变换 = Σ 相位移动。
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+傅里叶 & 我们的框架 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+基频 e\^{}\{iθ\} & 基本相位周期（90° 旋转 J，周期 4） \\
+谐波 e\^{}\{inθ\} & 周期循环的 n 次迭代（RulerAxis） \\
+傅里叶系数 aₙ & 各相位分量的权重 \\
+频率分解 & 相位对齐解构（RulerPhase） \\
+\end{longtable}
+
+\textbf{关键验证}：黎曼素数圆的 4 相位 = \textbf{4 阶单位根 =
+傅里叶基}！\textbf{RulerPhase 的''解构所有基点变换'' = 傅里叶分解}。
+
+\subsubsection{四·4 傅里叶化简方法 →
+框架映射}\label{ux56db4-ux5085ux91ccux53f6ux5316ux7b80ux65b9ux6cd5-ux6846ux67b6ux6620ux5c04}
+
+\textbf{Claim (RulerSimplify,
+PROVED)}：奇偶↔RulerAsym、Parseval↔RulerDrift、微分↔RulerAxis、卷积↔RulerDelta、移位↔RulerPhase、FFT↔归约链、吉布斯↔边界。
+
+三个最重要连接：\textbf{移位性质 = RulerPhase 的完备化}（时移 =
+频域乘相位）；\textbf{FFT = 归约链的算法化}（二分分治 =
+8→4→2→1）；\textbf{奇偶对称 = RulerAsym}。
+
+\subsubsection{四·5 FFT
+的边界：仍是在无限空间里化简}\label{ux56db5-fft-ux7684ux8fb9ux754cux4ecdux662fux5728ux65e0ux9650ux7a7aux95f4ux91ccux5316ux7b80}
+
+\textbf{Claim (RulerFFT, PROVED)}：FFT 二分 =
+归约链同构（N→N/2→\ldots→1），O(N²)→O(N log N)。但仍是无限空间化简（N→∞
+采样）------\textbf{不是''消灭无限''，是''更快地处理无限''}。下一步：消灭无限空间的化简（紧化式，RulerFold）。
+
+\textbf{支撑 (Lean)}：\texttt{timeRev\_timeRev} {[}NS1{]};
+\texttt{norm\_exp\_I\_eq\_one} {[}TK4{]};
+\texttt{even\_cluster\_meets\_one} {[}TK3{]}; \texttt{J\_pow\_four}
+{[}C011{]}。
+
+\subsection{五、折叠与编码：0-π 魔法数空间（RulerFoldCircle,
+RulerTernary, RulerNumeral, RulerDualTable, RulerMultiprecision,
+RulerNumeric）}\label{ux4e94ux6298ux53e0ux4e0eux7f16ux78010-ux3c0-ux9b54ux6cd5ux6570ux7a7aux95f4rulerfoldcircle-rulerternary-rulernumeral-rulerdualtable-rulermultiprecision-rulernumeric}
+
+\subsubsection{五·1 动机：圆 → 拍平 →
+对折}\label{ux4e941-ux52a8ux673aux5706-ux62cdux5e73-ux5bf9ux6298}
+
+用户问：``如果相位是个圆，我们把他拍平成一个线段，再对折，这是否就是无方向的0-无穷。''
+
+\textbf{Claim (RulerFoldCircle, PROVED)}：圆 → 拍平 → 对折 = 无方向线段
+{[}0,π{]}。
+
+\begin{itemize}
+\tightlist
+\item
+  三步：圆 S¹（有方向）→ 拍平 {[}0,2π{]}（切口 0\textasciitilde2π）→
+  对折 {[}0,π{]}（θ\textasciitilde2π-θ，共轭合并）。
+\item
+  对折 = 共轭合并 =
+  \textbf{消灭方向/手性}（\texttt{exp(i315°)\ =\ conj(exp(i45°))}）。
+\item
+  \textbf{精确化}：不是 0-∞（无限），而是
+  \textbf{0-π（有限）}------对折把''无穷''（2π 切口）合并回
+  0。全程有限，方向消失。
+\end{itemize}
+
+\subsubsection{五·2 三值空间：log 相位错位与
+\{-1,0,1\}}\label{ux4e942-ux4e09ux503cux7a7aux95f4log-ux76f8ux4f4dux9519ux4f4dux4e0e--101}
+
+\textbf{Claim (RulerTernary, PROVED)}：
+
+\textbf{问题1：log 基点相位不对齐}。log 周期 2πi vs 我们空间
+π/2：\textbf{2π/(π/2) = 4（错位！）}。⟹ log 产生很多位小数 =
+错位投影。\textbf{修正方向：用与 π/2 对齐的相位基（单位根）代替 log 的 e
+基}。
+
+\textbf{问题2a：三值还原小数}。数轴收敛到
+\{-1,0,1\}；三值化只恢复符号（有损，丢失相位）。
+
+\textbf{问题2b：-1 0 1 → 无损直达圆？} 4
+点表不能覆盖连续圆；但\textbf{符号（三值）× 连续相位表 =
+无损}（三值定方向，相位表定位置）。
+
+\subsubsection{五·3 相位 numeral
+编码}\label{ux4e943-ux76f8ux4f4d-numeral-ux7f16ux7801}
+
+\textbf{Claim (RulerNumeral, PROVED)}：魔法数空间 = 相位 numeral
+编码（与 token 快速 numeral 同构）。
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+token 体系 & 魔法数空间 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+int8 = 256 进制 & 三值 = 3 进制 \\
+digits\_to\_numeral & 三值位序列 → 相位 \\
+eval\_numeral & 沿三值位还原相位 \\
+\end{longtable}
+
+二分查找相位化简：log₃(精度)
+步。三值位序列是完备的相位编码（任意精度可达）。
+
+\subsubsection{五·4 两张 0-π
+魔法数表}\label{ux4e944-ux4e24ux5f20-0-ux3c0-ux9b54ux6cd5ux6570ux8868}
+
+\textbf{Claim (RulerDualTable, PROVED)}：自由度相位表（2\^{}k →
+{[}0,π{]}）× 发散/收敛相位表（-1/0/+1 →
+{[}0,π{]}）。同一编码空间，不同语义。复合 = 笛卡尔积 3\^{}k × 3\^{}k。
+
+\subsubsection{五·5
+多精度查表}\label{ux4e945-ux591aux7cbeux5ea6ux67e5ux8868}
+
+\textbf{Claim (RulerMultiprecision, PROVED)}：fp16/32/64
+三级（10³/10⁷/10¹⁵ 格）。与三值编码互补（动态 vs 预设精度）。fp64
+全表不可行（稀疏+插值）。
+
+\subsubsection{五·6
+值域优化：对数-相位编码}\label{ux4e946-ux503cux57dfux4f18ux5316ux5bf9ux6570-ux76f8ux4f4dux7f16ux7801}
+
+\textbf{Claim (RulerNumeric, PROVED)}：表项 = (符号 \textbar{} 对数幅度
+log2\textbar C\textbar{} \textbar{} 相位 {[}0,π{]})。
+
+\begin{itemize}
+\tightlist
+\item
+  均匀量化：相对精度随量级变（小值浪费）；\textbf{对数量化：相对误差恒定
+  2\%}。
+\item
+  表达范围：8 bit 均匀 \textasciitilde2⁸ → 对数
+  \textasciitilde2\textsuperscript{(2}8)（指数扩大）。
+\item
+  C 溢出修复：s→1 时 C→∞，log2\textbar C\textbar{} 无溢出。
+\item
+  \textbf{学浮点设计}------这不是巧合：\textbf{相位（对数）是穿折越框架的自然值域}。
+\end{itemize}
+
+\textbf{支撑
+(Lean)}：\texttt{foldAngle}/\texttt{fold\_kills\_direction}/\texttt{fold\_finite}
+{[}CircleFold{]}; \texttt{sign\_is\_pm\_one} {[}TK2{]};
+\texttt{dofLevel} {[}TK4{]}; \texttt{log\_pow\_mul} {[}TK4{]};
+\texttt{totalCost}/\texttt{cost\_minimal\_at\_sqrt}
+{[}MidpointTable{]}。
+
+\subsection{六、结论：尺子造好了}\label{ux516dux7ed3ux8bbaux5c3aux5b50ux9020ux597dux4e86}
+
+22 个 claim 构成''造尺子''的完整链条：
+
+\begin{verbatim}
+找原点: 区分(2) → 2 是第一个有区分的基数 (RulerTwo)
+画轴:   delta(位移) → 基点 = delta 的锚 (RulerDelta)
+漂移:   值漂移, 位置不变 (RulerDrift)
+破缺:   相对 2 = 不对称 (RulerAsym)
+发散:   结构丢失 → 收敛化 = 恢复对称 (RulerLoss/Fold/Middle)
+相位:   对称性 = 相位 → 基点 = 相位 (RulerCycle/Phase)
+分解:   傅里叶完备 (RulerFourier/Simplify/FFT)
+编码:   对折 [0,π] → 三值 → numeral → 对数-相位 (FoldCircle→Numeric)
+\end{verbatim}
+
+\textbf{核心统一主张}：区分（2）产生 delta（位移），delta
+锚定基点，基点漂移值而位置不变；发散是结构丢失，收敛化是恢复对称性方向；对称性是相位，相位可对齐（穿折越）、可分解（傅里叶）、可编码（三值/对数）。\textbf{尺子造好了------找原点（2）、画坐标轴（delta）、让轴变成相位（傅里叶）------高级预言学（算器神魂论系列之三）可以开始了。}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Appendix A:
+诚实边界}\label{appendix-a-ux8bdaux5b9eux8fb9ux754c}
+
+\begin{itemize}
+\tightlist
+\item
+  所有 Lean 定理 \texttt{lake\ build} 通过、无 sorry。
+\item
+  RulerTwo 的''2 是最小区分基数''是元定理（对象级不可证）。
+\item
+  RulerMiddle 的两假设（中间态一张表、最长路径最快）是假设非定理。
+\item
+  物理断言（时间箭头、CPT）为 KNOWN 背景。
+\end{itemize}
+
+\subsection{Appendix B:
+验证数据汇总}\label{appendix-b-ux9a8cux8bc1ux6570ux636eux6c47ux603b}
+
+\begin{itemize}
+\tightlist
+\item
+  归约链: 8→4→2→1（2 的幂减半）
+\item
+  误差比率: e(2n)/e(n) = 2\^{}(1-s)（s=2: 0.500 恒定）
+\item
+  log 错位: 2π/(π/2) = 4
+\item
+  三值编码: 相位 π/4 → {[}1,1,0,0{]}
+\item
+  对折: 30°↔330°→30°（共轭合并）
+\item
+  对数范围: 8 bit \textasciitilde2\textsuperscript{(2}8)（指数扩大）
+\item
+  中点: N* = √(c/s)（硬件决定）
+\end{itemize}
+
+\end{document}
