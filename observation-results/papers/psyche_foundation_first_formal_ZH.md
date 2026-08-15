@@ -96,14 +96,19 @@
 
 ## 四、完备性验证
 
+**上百组 transformer 实验的三类对比观测** (run_exp 配置驱动, 2026-08 起 v5 tokenizer 实验体系, 直觉/结构双通道 × 单 token OOD × epoch 曲线):
+
 | 验证 | 数据 | 结果位置 |
 |---|---|---|
-| 单 token OOD 0/1 对比 | 30 token 中 29 个 1.0, 唯一 inversion 0.0 | `src/llm_research_v5/docs/paper_data/exp_sym_inv_results.md` |
-| 逐 token 收敛序 | multiplication (1) < power (3) < division (4) < inversion (5) | `exp_sym_fr_curve_results.md` |
+| **直觉 vs 结构双通道对比 (2×2 消融)** | 直觉算符 (iop 无方程原子) 所有配置判定 **1.000** (epoch 0.45→1.00 收敛干净); 结构算符 (标准定义链) **0.997** (0.55→0.98 残余, 唯一残差 inversion 0.5); numeral 载体无差别——算符载体决定性: 结构歧义在定义链, 不在表示层 | `exp_dual_path_results.md` / `筑基篇_完备逻辑_四要素版.md` |
+| **单 token OOD 0/1 对比** | 30 token 中 29 个泛化 1.0, 唯一 inversion 0.0 (per_token_gen 1/30); 一元算符判定 0.000 (EXP-SYM-GROUP) | `exp_sym_inv_results.md` / `exp_sym_group_results.md` |
+| **epoch 曲线对比 (逐 token 0/1 序列)** | multiplication [0 1 1 1 1 1 1 1] (epoch 1) < power (3) < division (4) < inversion [0 0 0 0 0 1 1 1] (5); epoch_gen_all 0.55→1.00, 0-acc 14→0; 19 运算混合训练曲线 (train_curves.png / ood_curve_all_ops.png) | `exp_sym_fr_curve_results.md` / `lab/gen_all_ops.py` |
 | 解自指 0→1 | 嵌套 0.997 → 原生 1.000 | `结论_准确语法解开自指与四步完备方法.md` |
 | 跨表示剥离 | 换表示全崩 0/32 (I7n) | `逻辑完备实验设计方法论.md` |
 | 跨锚零样本 | 0/32 (I7k); 跨锚单声明 4/5 (I7t) | `逻辑不完备实验设计.md` |
-| Lean 验收 | 筑基篇 18 claims, 0 sorry | `formal/Formal/Toolkit/` |
+| 互逆对学习前提 | and↔or / xor↔xnor 同训 0.092 → 0.927; neg 混合 ≥4 算符 0.054 → 1.0 | `exp61_results.md` / `exp_sym_token_observation.md` |
+| 四相位互锁 | {1, i, −1, −i} 单位圆, 8 epochs acc 1.000 (0-acc 16→0) | `exp_cplx_basepoint_results.md` |
+| Lean 验收 | 筑基篇 18 claims + 互锁 7 定理 (MutualLocking/Pat4Phase), 0 sorry | `formal/Formal/Toolkit/` |
 
 ---
 
