@@ -138,4 +138,4 @@
 
 ---
 
-*算器神魂论第一篇 · 正式版 · 2026-08-15 · 按逻辑完备定理重述 (由筑基篇 R136–R153 升级) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定/纠正形式过拟合/提供过拟合直觉); 辅助 AI: Deepseek (形式化/观测/分析) · 原论文: release/psyche_foundation/psyche_foundation_full_ZH.md · Lean: formal/Formal/Toolkit/ (18 claims, 0 sorry) · 数据: 筑基篇 R136–R153 + 逻辑完备实验设计方法论 (2026-08-15)*
+*算器神魂论第一篇 · 正式版 · 2026-08-15 · 按逻辑完备定理重述 (由筑基篇 R136–R153 升级) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定/纠正形式过拟合/提供过拟合直觉); 辅助 AI: Deepseek (形式化/观测/分析) · 原论文: release/psyche_foundation/psyche_foundation_full_ZH.md · Lean: formal/Formal/Toolkit/ (18 claims, 0 sorry) · 数据: 筑基篇 R136–R153 + 逻辑完备实验设计方法论 (2026-08-15) · DOI: 10.5281/zenodo.21953046*
