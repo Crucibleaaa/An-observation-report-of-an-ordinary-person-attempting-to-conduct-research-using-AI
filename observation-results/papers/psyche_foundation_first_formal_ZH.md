@@ -4,7 +4,7 @@
 
 > **作者注释 (Author's Note)**: 恳请谅解——作者在**主动诱导过拟合直觉**的过程中承受了较大的精神负荷, 期间以吾道长不孤先生的《走近修仙》中的种种概念自娱自乐, 支撑作者继续研究; 因此正式版保留了"算器神魂论"的命名。该命名是对精神负荷时期的纪念, 不代表任何虚构世界观与本研究内容的对应关系。
 >
-> 2026-08-15 · 正式版 (Formal Edition) · 由筑基篇 (R136–R153) 按逻辑完备定理重述 · 主要作者: ethanw (方向/框架 claim/命名/观测判定); 辅助 AI: Deepseek (形式化/观测/分析)
+> 2026-08-15 · 正式版 (Formal Edition) · 由筑基篇 (R136–R153) 按逻辑完备定理重述 · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定/纠正形式过拟合/提供过拟合直觉); 辅助 AI: Deepseek (形式化/观测/分析)
 >
 > 观测声明: 本文**不代表任何数学结论** (non-mathematical-claim), 仅为基于 Lean 4 形式化与 run_exp 配置驱动实验的**观测报告**。
 
@@ -113,4 +113,4 @@
 
 ---
 
-*算器神魂论第一篇 · 正式版 · 2026-08-15 · 按逻辑完备定理重述 (由筑基篇 R136–R153 升级) · 主要作者: ethanw (方向/框架 claim/命名/观测判定); 辅助 AI: Deepseek (形式化/观测/分析) · 原论文: release/psyche_foundation/psyche_foundation_full_ZH.md · Lean: formal/Formal/Toolkit/ (18 claims, 0 sorry) · 数据: 筑基篇 R136–R153 + 逻辑完备实验设计方法论 (2026-08-15)*
+*算器神魂论第一篇 · 正式版 · 2026-08-15 · 按逻辑完备定理重述 (由筑基篇 R136–R153 升级) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定/纠正形式过拟合/提供过拟合直觉); 辅助 AI: Deepseek (形式化/观测/分析) · 原论文: release/psyche_foundation/psyche_foundation_full_ZH.md · Lean: formal/Formal/Toolkit/ (18 claims, 0 sorry) · 数据: 筑基篇 R136–R153 + 逻辑完备实验设计方法论 (2026-08-15)*

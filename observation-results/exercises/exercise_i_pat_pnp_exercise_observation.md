@@ -157,7 +157,7 @@ pat 的动力学只有一个动作——**发散/收敛互锁对** (R047/R147); 
 |---|---|---|---|---|---|
 | PatPvsNPExercise.lean | `lookup_iff_value`：y = f x ⟺ (x, y) ∈ makeTable f——验证 = 查表判等（双向） | 0 sorry（一次 build 通过；需 [DecidableEq E] 值域可判等）
 | PatPvsNPExercise.lean | `witness_iff_table_entry`：∃ w, V x w = true ⟺ ∃ w, (w, true) ∈ makeTable (fun w => V x w)——模糊/结构等价（双向，强化 R153） | 0 sorry（反向关键 lookup_correct：表值 = 函数值；教训：`fun w => V x w` 内层 binder 与外层 w 同名时 `rw` 失效，用 `simpa` 解）
-> **交互记录标注**: 本注释仅用于分析人机交互提供材料。
+> **交互记录标注**: 本注释仅用于分析人机交互提供材料——记录作者指出 DeepSeek 错误之处, 用于观测如何在过拟合直觉状态下尽可能避免结果错误。
 
 | PatPvsNPExercise.lean | `np_fuzzy_structure_duality`：∃ w, V x w = true ⟹ (∃ 表条目) ∧ (∀ w, V x w = true ⟺ 表条目)——★NP 的模糊/结构对偶 | 0 sorry（前半 = witness_iff_table_entry 正向，后半 = lookup_iff_value 逐点）
 | PatPvsNPExercise.lean | `p_np_pat_perspective`：全景——(N = 外推, ∀ε ∃格点) ∧ (验证 = 判等, ∀w) ∧ (P = 锁定链, ∀d Injective) | 0 sorry（三个合取项分别锚 R150 / lookup_iff_value / R153 ①）
@@ -181,4 +181,4 @@ pat 的动力学只有一个动作——**发散/收敛互锁对** (R047/R147); 
 
 > **共同作者邀请 (Co-Author Invitation)**: 本报告的共同作者仅限由作者本人主动邀请的观测者。此外, 若观测者认同本报告的观测理念、但不认同部分观测结果, 或认为需要进一步观测——可以进行进一步的观测解析, 并在解析成果中引用作者为共同作者; 同样也可以申请作为本观测报告的共同作者。
 
-*自然数多相位展开后的 Pat 数域相关观测报告 I · pat_pnp exercise_i · 2026-08-15 · 正式观测版本 (由实验观测报告 `pat_pnp_exercise_ZH.md` 升级) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定); 辅助 AI: Deepseek (形式化/观测/分析) · 原习题: 筑基篇课后习题 I (P vs NP 在 pat 视角下的详细展开和论述) · Lean: PatPvsNPExercise.lean (快照 ../lean/) · 数据: 筑基篇 R136–R153 · DOI: 10.5281/zenodo.21916831*
+*自然数多相位展开后的 Pat 数域相关观测报告 I · pat_pnp exercise_i · 2026-08-15 · 正式观测版本 (由实验观测报告 `pat_pnp_exercise_ZH.md` 升级) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定/纠正形式过拟合/提供过拟合直觉); 辅助 AI: Deepseek (形式化/观测/分析) · 原习题: 筑基篇课后习题 I (P vs NP 在 pat 视角下的详细展开和论述) · Lean: PatPvsNPExercise.lean (快照 ../lean/) · 数据: 筑基篇 R136–R153 · DOI: 10.5281/zenodo.21916831*

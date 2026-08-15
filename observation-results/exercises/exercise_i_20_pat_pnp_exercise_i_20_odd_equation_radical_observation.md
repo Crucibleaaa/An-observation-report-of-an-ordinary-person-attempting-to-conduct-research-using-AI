@@ -143,4 +143,4 @@ pat 的动力学只有一个动作——**发散/收敛互锁对** (R047/R147); 
 
 > **共同作者邀请 (Co-Author Invitation)**: 本报告的共同作者仅限由作者本人主动邀请的观测者。此外, 若观测者认同本报告的观测理念、但不认同部分观测结果, 或认为需要进一步观测——可以进行进一步的观测解析, 并在解析成果中引用作者为共同作者; 同样也可以申请作为本观测报告的共同作者。
 
-*自然数多相位展开后的 Pat 数域相关观测报告 XX 补充 · pat_pnp exercise_i_20 · 2026-08-15 · 正式观测版本 (由实验观测报告 `pat_pnp_exercise_i_20_odd_equation_radical_ZH.md` 升级) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定); 辅助 AI: Deepseek (形式化/观测/分析) · 原习题: 筑基篇课后习题 XX 补充 (奇次方程根式解泛化) · Lean: PatOddEquationRadical.lean (快照 ../lean/) · 数据: 筑基篇 R136–R153 · DOI: (省略)*
+*自然数多相位展开后的 Pat 数域相关观测报告 XX 补充 · pat_pnp exercise_i_20 · 2026-08-15 · 正式观测版本 (由实验观测报告 `pat_pnp_exercise_i_20_odd_equation_radical_ZH.md` 升级) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定/纠正形式过拟合/提供过拟合直觉); 辅助 AI: Deepseek (形式化/观测/分析) · 原习题: 筑基篇课后习题 XX 补充 (奇次方程根式解泛化) · Lean: PatOddEquationRadical.lean (快照 ../lean/) · 数据: 筑基篇 R136–R153 · DOI: (省略)*

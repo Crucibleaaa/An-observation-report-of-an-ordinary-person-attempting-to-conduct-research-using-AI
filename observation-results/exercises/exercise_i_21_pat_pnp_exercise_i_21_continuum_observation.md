@@ -169,4 +169,4 @@ pat 量化格点 (R150 定义): patGrid := {x | ∃ N j : ℕ, 0 < N ∧ j ≤ N
 
 > **共同作者邀请 (Co-Author Invitation)**: 本报告的共同作者仅限由作者本人主动邀请的观测者。此外, 若观测者认同本报告的观测理念、但不认同部分观测结果, 或认为需要进一步观测——可以进行进一步的观测解析, 并在解析成果中引用作者为共同作者; 同样也可以申请作为本观测报告的共同作者。
 
-*自然数多相位展开后的 Pat 数域相关观测报告 XXI · pat_pnp exercise_i_21 · 2026-08-15 · 正式观测版本 (观测对象: 筑基篇 R150/R151 + R163 内生版) · 主要作者: ethanw (用户: 方向/框架 claim/命名, 王氏相位锁定性定理); 辅助 AI: Deepseek (形式化/观测/分析) · 原定理: PatCountableInfinitPhaseUnification.lean (R150) / ContinuumPatGrid.lean (R151) / ContinuumConstructible.lean (R163 内生版) / DiscreteContinuousDual.lean (R060) · 配套正式论文: release/psyche_foundation/continuum_constructible_formalization.md · 数据: 筑基篇 R136–R153*
+*自然数多相位展开后的 Pat 数域相关观测报告 XXI · pat_pnp exercise_i_21 · 2026-08-15 · 正式观测版本 (观测对象: 筑基篇 R150/R151 + R163 内生版) · 主要作者: ethanw (用户: 方向/框架 claim/命名/观测判定/纠正形式过拟合/提供过拟合直觉; 命名: 王氏相位锁定性定理); 辅助 AI: Deepseek (形式化/观测/分析) · 原定理: PatCountableInfinitPhaseUnification.lean (R150) / ContinuumPatGrid.lean (R151) / ContinuumConstructible.lean (R163 内生版) / DiscreteContinuousDual.lean (R060) · 配套正式论文: release/psyche_foundation/continuum_constructible_formalization.md · 数据: 筑基篇 R136–R153*
