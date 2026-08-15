@@ -8,9 +8,9 @@
 
 | 目录 | 内容 | 说明 |
 |---|---|---|
-| `papers/` | 正式论文 (36 文件) | token 体系 P0/P1/P2/纲领 + structure_emergence + Case Study + basepoint×3 + conjectures (md/tex/pdf) + **算器神魂论第一篇正式版** (逻辑完备定理重述) |
+| `papers/` | 正式论文 (43 文件) | token 体系 P0/P1/P2/纲领 + structure_emergence + Case Study + basepoint×3 + conjectures + **算器神魂论筑基篇全套** (ZH/EN md/pdf + 连续统论文 + related_work + 正式版 + MANIFEST.json) |
 | `exercises/` | 课后习题 I-XXII + Pat0-1 + crossref (88 文件) | 每习题: 论文 md/tex/pdf + lean_code.zip, 含声明头 (习题/主题/Lean/DOI); **正式版观测报告 25 篇** (自然数多相位展开后的 Pat 数域相关观测报告系列, 见 exercises/README.md 索引) |
-| `lean/` | Lean 代码 (4 zip) | token_relative / zero_relative / toolkit_pat / psyche |
+| `lean/` | Lean 代码 (5 zip) | token_relative / zero_relative / toolkit_pat / psyche / **psyche_foundation_lean (21 文件, 筑基篇 18 claims)** |
 | `code/` | 研究代码 (2 zip) | keahas 工具包 + tokenizer 核心 (tokenizer/lab/train/verify) |
 | `results/` | 结果观测 (19 文件) | fold_num_v5 metrics/config + 16 份实验记录 (exp01-exp60) |
 
